@@ -1,0 +1,220 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* สำคัญ: ทำให้ padding ไม่ดันขนาดออกไป */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #202020;
+  /* พื้นหลังสีเทาเข้ม */
+  color: #e0e0e0;
+  /* สีตัวอักษรเริ่มต้น */
+}
+
+/* คอนเทนเนอร์หลัก (App.jsx) */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+/* เราจะรวมสไตล์จาก linkWrapper และ noteTitle เข้าด้วยกัน */
+.note-title-link {
+  /* จาก linkWrapper */
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  /* จาก noteTitle */
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+
+.note-title-link:hover {
+  text-decoration: underline;
+  color: #FFD700;
+}
+
+.nav-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #e0e0e0;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #1a1919;
+  border-color: #FFD700;
+  color: #ffffff;
+}
+
+.nav-link.active {
+  border-color: #FFD700;
+  color: #FFD700;
+  background-color: #1a1919;
+}
+
+
+/* 2. สไตล์สำหรับปุ่ม Search */
+.nav-search-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #FFD700;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-search-button:hover {
+  background-color: #fde143;
+}
+
+/* 1. สไตล์พื้นฐานของปุ่ม Emoji (แทน reactionButton) */
+.reaction-button {
+  background-color: #666;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  opacity: 0.7;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform: scale(1);
+}
+
+/* 2. สไตล์ "ตอนชี้" (Hover) สำหรับปุ่มปกติ */
+.reaction-button:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  border-color: #FFD700;
+}
+
+/* 3. สไตล์ของปุ่มที่ "ถูกเลือก" (แทน reactionButtonActive) */
+.reaction-button-active {
+  background-color: #363636;
+  border: 1px solid #ffffff;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 4. สไตล์ "ตอนชี้" (Hover) สำหรับปุ่มที่ "ถูกเลือก" */
+.reaction-button-active:hover {
+  transform: scale(1.3);
+  border-color: #FFD700;
+}
+
+/* 1. สไตล์พื้นฐานของกรอบ Comment (แทน commentItem) */
+.comment-item {
+  background-color: #555;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: left;
+  border: 1px solid #777;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* 2. สไตล์ "ตอนชี้" (Hover)*/
+.comment-item:hover {
+  background-color: #2c2c2c;
+  border-color: #FFD700;
+}
+
+
+/* 1. สำหรับกรอบ Note ในหน้า PublicNotesPage */
+.public-note-item {
+  background-color: #555;
+  padding: 15px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: left;
+  position: relative;
+  border: 1px solid #777;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.public-note-item:hover {
+  background-color: #2c2c2c;
+  border-color: #FFD700;
+}
+
+/* --- */
+
+/* 2. สำหรับกรอบ Note ในหน้า NoteDetailPage */
+.detail-note-item {
+  background-color: #555;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: left;
+  position: relative;
+  border: 1px solid #777;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.detail-note-item:hover {
+  background-color: #606060;
+  border-color: #aaa;
+}
+
+
+/* 1. กล่อง Reaction Counts (ที่คลิกดูคนกด) */
+.reaction-counts {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #444;
+  padding: 2px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 0.5px solid transparent;
+  /* (เพิ่ม transition) */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.reaction-counts:hover {
+  background-color: #333;
+  /* (สีเข้มขึ้น) */
+  border-color: #FFD700;
+}
+
+.reaction-button-small {
+  background-color: #666;
+  /* สีพื้นหลังปกติ */
+  border: 1px solid #888;
+  color: #e0e0e0;
+  border-radius: 10px;
+  padding: 3px 8px;
+  /* เล็กกว่าเดิม */
+  font-size: 0.9em;
+  /* เล็กกว่าเดิม */
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.reaction-button-small:hover {
+  background-color: #777;
+  border-color: #999;
+}
+
+/* * (ใช้สไตล์ Active เดิม)
+ * เมื่อปุ่ม 'small' ถูกเลือก (มีคลาส -active)
+ * เราจะใช้สไตล์เดียวกับปุ่ม reaction-button ใหญ๋ 
+ */
+.reaction-button-small.reaction-button-active {
+  background-color: #3a3a3a;
+  border-color: #FFD700;
+  /* สีเหลือง */
+  color: #FFD700;
+}
