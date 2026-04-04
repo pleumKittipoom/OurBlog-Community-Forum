@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # 1. NestJS App Service
+  api:
+    build: . # บอกให้สร้าง Image จาก Dockerfile ในโฟลเดอร์นี้
+    ports:
+      - "3000:3000" # แมพพอร์ต 3000 ของเครื่องเรา ไปยัง 3000 ใน container
+    volumes:
+      - .:/usr/src/app # "Sync" โค้ดของเราเข้าไปใน container (สำหรับ Hot-Reload)
+      - /usr/src/app/node_modules # ไม่ sync node_modules จากเครื่องเรา
+    depends_on:
+      - db # บอกให้รอก่อน ให้ db (Postgres) ทำงานก่อน
+    environment:
+      # ส่งค่าเหล่านี้เข้าไปให้ NestJS ใช้
+      DATABASE_HOST: db # "db" คือชื่อ service ของ Postgres ข้างล่าง
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 2003
+      DATABASE_NAME: docker_auth_db
+      JWT_SECRET: my_super_secret_key_123 # สำหรับสร้าง Token
+
+  # 2. PostgreSQL Database Service
+  db:
+    image: postgres:14-alpine # ใช้ Image สำเร็จรูปของ Postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2003
+      POSTGRES_DB: docker_auth_db
+    ports:
+      - "5433:5432" # (Optional) แมพพอร์ต เผื่อเราอยากต่อ DB จากข้างนอก
+    volumes:
+      - postgres-data:/var/lib/postgresql/data # "Volume" สำหรับเก็บข้อมูล DB จริงๆ
+
+volumes:
+  postgres-data: # ประกาศ Volume
