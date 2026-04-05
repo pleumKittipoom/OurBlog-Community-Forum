@@ -472,4 +472,4 @@ For issues, questions, or suggestions, please:
 ---
 
 **Version**: 0.0.1  
-**Last Updated**: April 2026
+**Last Updated**: 2025
